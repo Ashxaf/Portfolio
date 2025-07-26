@@ -30,9 +30,11 @@ function Hero() {
               passion, an analyst by skill. I turn chaos into clarity, and ideas
               into will.
             </p>
+            <a href="https://wa.me/918983105780" target="_blank">
             <button className="w-fit p-5  !bg-[#fdfcdc] text-[#0d1b2a] liquid">
               Say Hello!
             </button>
+            </a>
           </div>
 
           {/* Right Content */}
