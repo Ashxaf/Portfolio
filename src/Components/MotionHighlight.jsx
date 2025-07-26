@@ -1,5 +1,5 @@
 import {  BookOpen, Brain, Clock, Handshake, Lightbulb, Mic, Rocket, ShieldCheck } from 'lucide-react';
- import { MotionHighlight } from '@/components/animate-ui/effects/motion-highlight';
+ import { MotionHighlight } from '@/components/animate-ui/effects/motion-highlight.tsx';
  
 const CARDS = [
   {
