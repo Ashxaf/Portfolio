@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import degree from "../assets/degree.png";
 import Focus from "../assets/Focus.png";
 import Strength from "../assets/Strength.png";
@@ -29,6 +29,12 @@ const cards = [
 ];
 
 function AboutSection() {
+    const [activeCard, setActiveCard] = useState(null);
+
+  const handleCardClick = (index) => {
+    // Toggle card on click
+    setActiveCard((prev) => (prev === index ? null : index));
+  };
   return (
     <section
       id="about"
@@ -85,37 +91,49 @@ function AboutSection() {
 
           {/* Right - Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-6">
-            {cards.map((card, index) => (
+          {cards.map((card, index) => {
+            const isActive = activeCard === index;
+            return (
               <div
                 key={index}
-                className="group relative h-44 overflow-hidden rounded-xl shadow-xl border border-[#e0e0e0] cursor-pointer bg-white"
+                className="relative h-44 overflow-hidden rounded-xl shadow-xl border border-[#e0e0e0] cursor-pointer bg-white group"
+                onClick={() => handleCardClick(index)}
               >
-                {/* Background image using inline style */}
+                {/* Background Image */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-active:scale-105 group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url(${card.img})`,
-                  }}
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${card.img})` }}
                 >
                   <div className="absolute inset-0 bg-black/55"></div>
                 </div>
 
                 {/* Title */}
-                <div className="absolute inset-0 flex items-center justify-center transition-all duration-500 group-active:translate-y-full group-active:opacity-0 group-hover:-translate-y-full delay-100 group-hover:opacity-0 z-10 ">
-                  <h3 className="text-xl font-bold text-[#fdfcdc] text-center">
+                <div
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 z-10 text-[#fdfcdc] ${
+                    isActive
+                      ? "translate-y-full opacity-0"
+                      : "group-hover:-translate-y-full group-hover:opacity-0"
+                  }`}
+                >
+                  <h3 className="text-xl font-bold text-center">
                     {card.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <div className="absolute inset-0 flex items-center justify-center transition-all duration-500 translate-y-full group-active:translate-y-0 group-active:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 opacity-0 z-20">
-                  <p className="text-normal text-[#fdfcdc] px-6 text-center font-semibold">
-                    {card.description}
-                  </p>
+                <div
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 z-20 text-[#fdfcdc] px-6 text-center font-semibold ${
+                    isActive
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+                  }`}
+                >
+                  <p>{card.description}</p>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
         </div>
       </div>
     </section>
